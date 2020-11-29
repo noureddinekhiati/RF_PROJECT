@@ -64,7 +64,9 @@ public class KMeans {
 					matriceDistance.get(i).distances.set(j, moyenne);
 				}
 				matriceDistance.get(i).index=i;
+				//out.print("avant "+matriceDistance.get(i).cluster+"\t");
 				matriceDistance.get(i).updateCluster();
+				//out.print("après "+matriceDistance.get(i).cluster+"\n");
 
 			}
 			firstIteration=false;
