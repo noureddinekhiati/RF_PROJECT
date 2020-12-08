@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import static java.lang.System.out;
 
-public class Features {
+public class Features implements Comparable {
 	String id;
 	int classe;
 	ArrayList<Double> features = new ArrayList<Double>();
@@ -34,12 +34,25 @@ public class Features {
 
 	@Override
 	public String toString() {
-		return "\nclasse=" + classe + "\nfeatures=" + features + "]\n\n";
+		return "\nclasse=" + classe +"]\n\n";
 	}
 	
 	public void assignClass(int c) {
 		this.assignedClass=c;
 	}
+	@Override
+	public int compareTo(Object arg0) {
+		Features f=(Features)arg0;
+		return (this.assignClass-f.assignClass);
+	}
 	
-	
+	double getManhattanDistance(Features c) {
+		double s=0;
+		
+		for(int i=0;i<this.features.size();i++) {
+			//out.print("\n"+c.id+ ": "+this.features.get(i)+"-"+c.features.get(i)+"\n");
+			s+=Math.abs(this.features.get(i)-c.features.get(i));
+		}
+		return  (double) Math.round(s * 100) / 100;
+	}
 }

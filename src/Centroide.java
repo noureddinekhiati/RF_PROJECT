@@ -1,19 +1,15 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import static java.lang.System.out;
 import java.lang.reflect.Array;
 public class Centroide extends Features {
 	//int n=1;
-	
+	int realClassToAssociateWith;
 
-	double getManhattanDistance(Features c) {
-		double s=0;
-		
-		for(int i=0;i<this.features.size();i++) {
-			//out.print("\n"+c.id+ ": "+this.features.get(i)+"-"+c.features.get(i)+"\n");
-			s+=Math.abs(this.features.get(i)-c.features.get(i));
-		}
-		return  (double) Math.round(s * 100) / 100;
-	}
+
+	
+	
 	public static void updateCentroids(){
 		int nbr;
 		for (int i=0;i<KMeans.centroidList.size();i++) {
@@ -38,5 +34,11 @@ public class Centroide extends Features {
 		
 		
 	}
-	
+	public static void displayCenters() {
+		for (int i = 0; i < KMeans.centroidList.size(); i++) {
+			for (int j = 0; j < KMeans.centroidList.get(i).features.size(); j++) {
+				//out.print(KMeans.centroidList.get(i).features.get(j)+"\t|");
+			}
+		}
+	}
 }
