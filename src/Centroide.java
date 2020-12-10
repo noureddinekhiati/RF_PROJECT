@@ -9,7 +9,7 @@ public class Centroide extends Features {
 
 
 	
-	
+	//Fonction permettant la mise a jour des clusters
 	public static void updateCentroids(){
 		int nbr;
 		for (int i=0;i<KMeans.centroidList.size();i++) {

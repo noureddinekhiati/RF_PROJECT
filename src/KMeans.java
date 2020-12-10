@@ -19,6 +19,9 @@ public class KMeans {
 	public KMeans(int k) {
 		this.k=k;
 	}
+	
+	
+	//Initialisation des centres des k clusters pour Kmeans
 	void initCentroids() {
 		double step=0.03;
 		out.print(NbCenteroids);
@@ -37,6 +40,7 @@ public class KMeans {
 
 	}
 	
+	//Initialisation des cluster de façon semi supervisé
 	void initCentroids(String s) {
 		out.print(NbCenteroids);
 		for (int kk=0;kk<k;kk++) {
@@ -58,51 +62,11 @@ public class KMeans {
 		//out.print(k+"\n");
 	}
 	
-	double computeMoy(int n) {
-		return (sumColonne(n,NbrTrainEntries)/NbrTrainEntries);
-	}
-	double computeMoy(int n, int classe) {
-		int nbr=0;
-		for(int i=0;i<Execute.trainVectors.size();i++) {
-			if(Execute.trainVectors.get(i).classe==classe) {
-				nbr++;
-			}
-		}
-		return (sumColonne(n,nbr,classe)/nbr);
-	}
-	
-	double sumColonne(int n,int nbr) {
-		double somme=0;
-		for(int i=0;i<nbr;i++) {
-			//tuple i, la valeur n
-			somme=somme+Execute.trainVectors.get(i).features.get(n);
-		}
-		//out.print("\n"+somme);
-		return somme;
-
-	}
-	
-	double sumColonne(int n,int nbr, int classe) {
-		double somme=0;
-		
-		for(int i=0;i<Execute.trainVectors.size();i++) {
-			
-			//tuple i, la valeur n
-			if(Execute.trainVectors.get(i).classe==classe) {
-			somme=somme+Execute.trainVectors.get(i).features.get(n);
-			}
-			if(Execute.trainVectors.get(i).classe>classe) {
-				break;
-			}
-		}
-		//out.print("\n"+somme);
-		return somme;
-
-	}
+	// Lancement de l'apprentissage
 	void startTrain() {
 		Boolean firstIteration=true;
 		int I=0;
-		while(isChanged) {
+		while(isChanged) {// cette condition permet d'arreter l'algo en cas de stabilité sur les clusters
 			I++;
 			out.print("\n\n***----ITERATION--- "+I+" *** \n\n");
 			isChanged=false;
@@ -110,7 +74,10 @@ public class KMeans {
 				if(firstIteration) {matriceDistance.add(new Distance());}
 				for (int j=0;j<centroidList.size();j++) {
 					double moyenne=centroidList.get(j).
-							getManhattanDistance(Execute.trainVectors.get(i));					
+							getManhattanDistance(Execute.trainVectors.get(i));
+							//getCosineSimilarity(Execute.trainVectors.get(i));	
+					//Le choix de distance se fait ici!
+					
 					if(firstIteration) {matriceDistance.get(i).distances.add(0.0);}
 					matriceDistance.get(i).distances.set(j, moyenne);
 				}
@@ -129,12 +96,13 @@ public class KMeans {
 				out.print("\n");
 
 			}
-			out.print("END");
+			//Ici on mets a jour les centre de cluster!
 			Centroide.updateCentroids();
 			
 		}
 	}
 
+	// sauvgarder les clusters obtenus, avec leurs centres ..
 	@SuppressWarnings("unchecked")
 	void saveModel() {
 		Collections.sort(Execute.trainVectors);
@@ -158,4 +126,49 @@ public class KMeans {
 	}
 
 
+	
+	//primitives
+	double computeMoy(int n) {
+		return (sumColonne(n,NbrTrainEntries)/NbrTrainEntries);
+	}
+	double computeMoy(int n, int classe) {
+		int nbr=0;
+		for(int i=0;i<Execute.trainVectors.size();i++) {
+			if(Execute.trainVectors.get(i).classe==classe) {
+				nbr++;
+			}
+		}
+		return (sumColonne(n,nbr,classe)/nbr);
+	}
+	double sumColonne(int n,int nbr) {
+		double somme=0;
+		for(int i=0;i<nbr;i++) {
+			//tuple i, la valeur n
+			somme=somme+Execute.trainVectors.get(i).features.get(n);
+		}
+		//out.print("\n"+somme);
+		return somme;
+
+	}
+
+	double sumColonne(int n,int nbr, int classe) {
+		double somme=0;
+		
+		for(int i=0;i<Execute.trainVectors.size();i++) {
+			
+			//tuple i, la valeur n
+			if(Execute.trainVectors.get(i).classe==classe) {
+			somme=somme+Execute.trainVectors.get(i).features.get(n);
+			}
+			if(Execute.trainVectors.get(i).classe>classe) {
+				break;
+			}
+		}
+		//out.print("\n"+somme);
+		return somme;
+
+	}
+
+	
+	
 }

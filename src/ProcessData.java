@@ -15,6 +15,7 @@ public class ProcessData {
 	public static ArrayList<Image> testSet= new ArrayList<Image>();
 
 	public static void main(String[] args) {
+		//Lecture des fichiers
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		
@@ -41,7 +42,7 @@ public class ProcessData {
 					result=readFile(path, fichier, repertoire);
 					for (String res : result) {
 						
-					
+					//Affectation des valeurs lues selon leurs repertoire source!
 						switch(repertoire) {
 						  case "E34":
 							  i.setE34( Double.parseDouble(res));
@@ -60,7 +61,7 @@ public class ProcessData {
 				}
 				dataset.add(i);
 			}
-			//out.println(dataset);
+			//cette fonction permet de diviser les données en test et en train!
 			repartirData();
 	    
 	}
@@ -86,9 +87,10 @@ public static ArrayList<String> readFile(String path,String name, String extensi
 			return dataReaded;
 		  }
 
+
 public static void repartirData() {
 	for (int i=0;i<dataset.size();i++) {
-		
+		//Chaque modulo 3 on aura des données pour test!
 		if((i+1)%3==0) {
 			testSet.add(dataset.get(i));
 		}

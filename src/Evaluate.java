@@ -75,6 +75,8 @@ public class Evaluate {
 						min_class=Execute.trainVectors.get(deb).classe;
 						min_dist=d;
 					}
+					out.print("\n--||->min=\n\n\n\n"+min_class);
+
 				}
 				KMeans.centroidList.get(c-1).realClassToAssociateWith=min_class;
 			}
@@ -184,4 +186,3 @@ public class Evaluate {
 		return s;
 	}
 }
-

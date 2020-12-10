@@ -8,7 +8,7 @@ public class Distance {
 	ArrayList <Double> distances=new ArrayList<Double>();
 	int index;
 	int cluster;
-	
+	// Mettre a jour les clusters
 	void updateCluster() {
 		
 		Double m=Collections.min(distances);

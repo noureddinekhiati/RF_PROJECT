@@ -11,6 +11,7 @@ public class KNN {
 		this.k=k;
 	}
 	
+	//Initialisation des distance entre l'elt testé et tous les individus d'apprentissage
 	@SuppressWarnings("static-access")
 	public void initAllDistances(int k)  {
 		for (int i = 0; i < Execute.testVectors.size(); i++) {
@@ -19,6 +20,8 @@ public class KNN {
 			for (int j = 0; j < Execute.trainVectors.size(); j++) {
 				Features Neighbor=Execute.trainVectors.get(j);
 				double dist=T.getManhattanDistance(Neighbor);
+				//double dist=T.getCosineSimilarity(Neighbor);
+				//double dist=T.getEuclidianDistance(Neighbor);
 				l.addNeighbor(Neighbor, dist,k);
 				
 			}
@@ -43,6 +46,7 @@ public class KNN {
 			
 		 
 			//out.println(links.size());
+			//La classe link permet d'agir en tant que que graphe
 			Link link=links.get(i);
 			out.println("Ce vecteur est de classe: "+
 					link.tested.classe

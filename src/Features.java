@@ -46,6 +46,9 @@ public class Features implements Comparable {
 		return (this.assignClass-f.assignClass);
 	}
 	
+	
+	//Implementation des differentes métriques
+	
 	double getManhattanDistance(Features c) {
 		double s=0;
 		
@@ -53,6 +56,29 @@ public class Features implements Comparable {
 			//out.print("\n"+c.id+ ": "+this.features.get(i)+"-"+c.features.get(i)+"\n");
 			s+=Math.abs(this.features.get(i)-c.features.get(i));
 		}
+		return  (double) Math.round(s * 100) / 100;
+	}
+	double getEuclidianDistance(Features c) {
+		double s=0;
+		
+		for(int i=0;i<this.features.size();i++) {
+			//out.print("\n"+c.id+ ": "+this.features.get(i)+"-"+c.features.get(i)+"\n");
+			s+=Math.sqrt(Math.pow(this.features.get(i)-c.features.get(i),2));
+		}
+		return  (double) Math.round(s * 100) / 100;
+	}
+	double getCosineSimilarity(Features c) {
+		double s=0;
+		double normA=0;
+		double normB=0;
+		for(int i=0;i<this.features.size();i++) {
+			//out.print("\n"+c.id+ ": "+this.features.get(i)+"-"+c.features.get(i)+"\n");
+			s+=this.features.get(i)*c.features.get(i);
+			normA+=Math.pow(this.features.get(i), 2);
+			normB+=Math.pow(c.features.get(i), 2);
+
+		}
+		s=s/(Math.sqrt(normA) * Math.sqrt(normB));
 		return  (double) Math.round(s * 100) / 100;
 	}
 }
