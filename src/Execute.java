@@ -36,8 +36,8 @@ public class Execute {
 			//Kmean semi supervisé:	
 						//On initialise les centroides selon la moyenne des classes en informant l'algorithme
 			//Décommentez une des deux!
-		//KM.initCentroids();
-		KM.initCentroids("semi supervised");
+		KM.initCentroids();
+		//KM.initCentroids("semi supervised");
 	
 		
 		KM.startTrain();			//Lancement du modèle d'apprentissage
@@ -47,7 +47,7 @@ public class Execute {
 		
 	//KNN: Si vous voulez eéxecuter KNN décommentez ce bloc
 		
-		//k=3;
+		k=3;
 		//KNN knn=new KNN(k);
 		//knn.initAllDistances(k);
 		//knn.predict(k);

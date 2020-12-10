@@ -58,6 +58,8 @@ public class Features implements Comparable {
 		}
 		return  (double) Math.round(s * 100) / 100;
 	}
+	
+	
 	double getEuclidianDistance(Features c) {
 		double s=0;
 		
